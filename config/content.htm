@@ -1,7 +1,131 @@
 <h1>About</h1>
 <p>cmsite: wcms use <a href="https://github.com/mdecycu/cmsimde">https://github.com/mdecycu/cmsimde</a> as submodule</p>
 <h1>Hw</h1>
-<h2>w15</h2>
+<h2>w11</h2>
+<p><a href="https://mdecp2022.github.io/site-41123146/content/Brython.html?src=https://gist.githubusercontent.com/Mingray0105/f0932ed1e1cb2ae01072f9ac7b9c64c6/raw/608d9ac6bdebd6926025ada297047f91bdfe8dfb/w10_hw2_2">缺考名單</a></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import ast
+  
+# get stud_list first
+  
+def get_stud(c_name):
+    courses = {"1a": "0747", "1b": "0761", "2a": "0773", "2b": "0786"}
+    c = courses[c_name]
+    url = "https://nfu.cycu.org/?semester=1111&amp;courseno=" + c + "&amp;column=True"
+    data = open(url).read().split("\n")
+    stud = data[:-1]
+    return stud
+      
+cp_stud = get_stud("1a")
+  
+# get w10 quiz result
+cp_w10_quiz_url = "https://gist.githubusercontent.com/mdecycu/9df4b372ac1b7386cf259ced15f1a2b2/raw/9e8bf693a2805631aa12992db4d4f23e0f64e868/2022_1112_cp1a_w10_quiz.json"
+  
+def get_score(url):
+    json_data = open(url).read()
+    big_dict = ast.literal_eval(json_data)
+    data = big_dict["body"]["testuser"]
+    quiz_dict = {}
+    for i in data:
+        stud_id = data[i]["user_name"]
+        stud_score = int(float(data[i]["total_score"]))
+        quiz_dict[stud_id] = stud_score
+    return quiz_dict
+      
+cp_quiz = get_score(cp_w10_quiz_url)
+cp_abs = []
+for stud in cp_stud:
+    try:
+        print(stud, cp_quiz[stud])
+    except:
+        # 缺考者沒有 quiz 成績
+        print(stud, "缺")
+        cp_abs.append(stud)
+# 列出缺考名單
+print("="*20)
+print("以下為 w10 缺考名單:")
+for stud in cp_abs:
+    print(stud)</pre>
+<p></p><h2>w10</h2>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">a = ""
+for i in range(1, 10, 1):
+    a + str(i) + ","
+print(a)</pre>
+<p><a href="https://mdecp2022.github.io/site-41123146/content/Brython.html?src=https://gist.githubusercontent.com/Mingray0105/f0932ed1e1cb2ae01072f9ac7b9c64c6/raw/608d9ac6bdebd6926025ada297047f91bdfe8dfb/w10_hw2_2">w10_hw2</a><br/><br/></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">for i in range(1, 10, 2):
+    print(i,end=" ")</pre>
+<p></p><h2>w6</h2>
+<p><a href="https://mdecp2022.github.io/site-41123146/content/Brython.html?src=https://gist.githubusercontent.com/Mingray0105/299354412d38f7ea977d727a7dabb1dd/raw/4fdb65998e7a1a56f7abd3bc71347ea7bbb766e3/w6_hw1">顯示學員的網站</a></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from browser import document, html
+ 
+brython_div1 = document["brython_div1"]
+"""
+brython_div1 &lt;= html.BUTTON("hello")
+brython_div1 &lt;= html.BR()
+brython_div1 &lt;= html.A("google", href="https://google.com")
+"""
+ 
+url = "https://mde.tw/studlist/2022fall/1a.txt"
+data = open(url).read().split("\n")
+mdecp2022 = "https://mdecp2022.github.io/site-"
+data = data[1:-1]
+for i in data:
+    stud = i.split("\t")
+    stud_num = stud[0]
+    github_acc = stud[1]
+    #print(stud_num, github_acc)
+    if github_acc == "":
+        github_acc = stud_num
+    site = mdecp2022 + github_acc
+    link = html.A(stud_num, href=site)
+    brython_div1 &lt;= link
+    brython_div1 &lt;= html.BR()
+    if github_acc == "":
+        github_acc = stud_num</pre>
+<p><a href="https://mdecp2022.github.io/site-41123146/content/Brython.html?src=https://gist.githubusercontent.com/Mingray0105/43d178cbfb0abe42ef3c32cd82089406/raw/18fedcbb009bdffa3f0f068011ccb6a0ce670385/w6_h2">隨機抽點程式</a></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from browser import document, html
+# 使用 import 導入 random 模組, 隨後就可以直接引用 random 模組的方法
+import random
+brython_div1 = document["brython_div1"]
+# Python 的註解分為單行註解與多行, 單行註解可在字串前方放入 #
+"""
+brython_div1 &lt;= html.BUTTON("hello")
+brython_div1 &lt;= html.BR()
+brython_div1 &lt;= html.A("google", href="https://google.com")
+"""
+  
+# 宣告 url 變數值為字串, 此字串為取得 cp2022 1a 選課成員名單
+url = "https://mde.tw/studlist/2022fall/1a.txt"
+# 利用上述已經宣告的 url 變數字串值, 作為 open() 函式的輸入變數, 可以連結至該網站
+# 連接 url 所代表字串的網站後, 再利用 read() 函式讀取該網站的內容, 即可取得 cp2022 1a 的選課成員學號
+# 由於所取回的學號以跳行符號隔開, 因此取回的學號資料行, 再利用 split() 函式, 以 \n 跳行符號分割後
+# 所對應到 data 的資料型別將會是數列
+data = open(url).read().split("\n")
+# 宣告 mdecp2022 變數值為字串, 此字串為方便之後撰寫
+mdecp2022 = "https://mdecp2022.github.io/site-"
+# 宣告 data 為 data 的第二項到倒數第二項
+data = data[1:-1]
+  
+# 使用 random 模組裡的 shuffle 將data裡的元素打亂
+random.shuffle(data)
+# 使用重複迴圈在 data 裡取前五個(0,1,2,3,4)
+for i in data[:5]:
+    # 宣告 stud 變數為切割掉空格的i
+    stud = i.split("\t")
+    # 宣告 stud_num 為 stud 的第一項
+    stud_num = stud[0]
+    # 宣告 github_acc 為 stud 的第二項
+    github_acc = stud[1]
+    #print(stud_num, github_acc)
+    # 如果 github_acc 沒有取到
+    if github_acc == "":
+        # github_acc 就會是 stud_num
+        github_acc = stud_num
+    # site (網站)= mdecp2022 變數 + github_acc 變數
+    site = mdecp2022 + github_acc
+    link = html.A(stud_num, href=site)
+    brython_div1 &lt;= link
+    brython_div1 &lt;= html.BR()</pre>
+<p></p><h2>w15</h2>
 <div style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Web', sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px;">
 <ul>
 <li>為何學習計算機程式需要建立個人倉儲?</li>
