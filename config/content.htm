@@ -1,7 +1,17 @@
 <h1>About</h1>
 <p>cmsite: wcms use <a href="https://github.com/mdecycu/cmsimde">https://github.com/mdecycu/cmsimde</a> as submodule</p>
 <h1>Hw</h1>
-<h2>w11</h2>
+<h2>w14</h2><h2>w13</h2>
+<p><a href="https://mdecp2022.github.io/site-41123146/content/Brython.html?src=https://gist.githubusercontent.com/Mingray0105/002e962a542f4cc8c3a2ab9d76149e3a/raw/b8ff371a93fa8ed40a33e7ed2ecca7161eb31708/w13_hw">ex1</a></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">'''
+f = c*9/5+32
+c = (f-32)*5/9
+'''
+c=input("攝氏溫度值")
+print(type(c))
+c = float(c)
+print("你輸入的攝氏溫度: " + str(c), "等於華氏溫度: " + str(c*9/5+32))</pre>
+<p></p><h2>w11</h2>
 <p><a href="https://mdecp2022.github.io/site-41123146/content/Brython.html?src=https://gist.githubusercontent.com/Mingray0105/f0932ed1e1cb2ae01072f9ac7b9c64c6/raw/608d9ac6bdebd6926025ada297047f91bdfe8dfb/w10_hw2_2">缺考名單</a></p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import ast
   
@@ -155,6 +165,18 @@ for i in data[:5]:
 user_input_temp = input("請輸入攝氏溫度值:")
 # 接著列出 user_input_temp 變數的資料型別
 print(type(user_input_temp))</pre>
+<p><a href="https://mdecp2022.github.io/site-41123146/content/Brython.html?src=https://gist.githubusercontent.com/Mingray0105/706ac7cf84ab36ce19877fc7be355d0d/raw/15c49f738b0bf77d5bf2b706cc8a27fcf7bc129d/w12_hw2_2">ex2</a></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># Brython 的 input() 可以接受輸入提示字串, 跳出瀏覽器輸入表單後, 將輸入內容以字串取回
+user_input_temp = input("請輸入攝氏溫度值:")
+# 接著列出 user_input_temp 變數的資料型別
+print(type(user_input_temp))
+# 到這裡已知利用 input() 函式將傳回字串, 接著以 float() 將字串轉為浮點數
+user_input_temp = float(user_input_temp)
+# 因為攝氏溫度乘上 9/5 之後再加上 32 就可以得到對應的華氏溫度值
+Fahrenheit = (user_input_temp*9/5) + 32
+# 到這裡, Fahrenheit 資料型別為浮點數, 而 user_input_temp 在第 8 行也轉為浮點數
+# 要將兩個浮點數與字串相加, 都必須透過 str() 轉為字串
+print("攝氏 " + str(user_input_temp) + " 度, 等於華氏 " + str(Fahrenheit) + " 度.")</pre>
 <p></p><h1>Brython</h1>
 <p><a href="https://en.wikipedia.org/wiki/Python_(programming_language)">https://en.wikipedia.org/wiki/Python_(programming_language)</a></p>
 <h4>Examples:</h4>
